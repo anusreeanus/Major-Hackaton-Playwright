@@ -1,12 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { DiagnosticsPage } from '../pages/DiagnosticsPage';
 
-test('Get top diagnostic cities', async ({ page }) => {
+test('Get top diagnostic cities and save to JSON', async ({ page }) => {
   try {
     const diagnosticsPage = new DiagnosticsPage(page);
     await diagnosticsPage.goto();
     const cities = await diagnosticsPage.getCityList();
+
     console.log("Cities:", cities);
+
+    
+    const outputPath = path.join(__dirname, '../data/diagnosticCities.json');
+    fs.writeFileSync(outputPath, JSON.stringify({ cities }, null, 2), 'utf-8');
   } catch (error) {
     console.log('Error in Get top diagnostic cities test');
   }
