@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 import { test, expect } from '@playwright/test';
 import { DiagnosticsPage } from '../pages/DiagnosticsPage';
 

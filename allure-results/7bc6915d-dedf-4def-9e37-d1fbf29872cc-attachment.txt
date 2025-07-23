@@ -1,7 +1,0 @@
-Cities: [
-  'Bangalore', 'Delhi',
-  'Mumbai',    'Chennai',
-  'Hyderabad', 'Kolkata',
-  'Pune',      'Ahmedabad'
-]
-Error in Get top diagnostic cities test
