@@ -10,11 +10,16 @@ export class DiagnosticsPage {
       console.error('Error navigating to diagnostics page:');
     }
   }
-  //Promise.all waits for all innerText() calls to complete.
+ 
   async getCityList() {
     try {
+      const cityNames=[]
       const cities = await this.page.locator("//li[@class='u-text--center']").all();
-      const cityNames = await Promise.all(cities.map(city => city.innerText()));
+      for(const city of cities){
+        cityNames.push(await city.innerText());//Extract city names from the list
+
+      }
+     
       return cityNames;
     } catch (error) {
       console.error('Error retrieving city list:', error);

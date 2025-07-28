@@ -6,7 +6,7 @@ test('Validate form does not allow submission with invalid data', async ({ page 
     const wellnessPage = new CorporateWellnessPage(page);
     await wellnessPage.goto();
     await wellnessPage.fillInvalidDetails();
-    await expect(wellnessPage.scheduleButton).toBeDisabled();
+    await expect(wellnessPage.scheduleButton).toBeDisabled();//validate that the scheule button is disabled
   } catch (e) {
     console.log('Validate form does not allow submission with invalid data');
   }
@@ -20,13 +20,12 @@ test('Form Schedule button disable with out phone number field input', async ({ 
     await wellnessPage.fillValidDetails();
 
     const button = await wellnessPage.scheduleButton;
-    // await button.waitFor({ state: 'visible' });
+    
     
     await expect(button).toBeDisabled();
-
-    // await expect(isEnabled).toBeTruthy();
+    //await expect(isEnabled).not.toBeTruthy();//checking not enabled
   } catch (e) {
-    //expect(button).toBeDisabled()
+   
     console.log('Form enables Schedule Demo button with out valid input ');
   }
 });
@@ -36,14 +35,12 @@ test('Dropdown values reflect correctly after selection', async ({ page }) => {
     const wellnessPage = new CorporateWellnessPage(page);
     await wellnessPage.goto();
 
-    await wellnessPage.orgSizeSelect.selectOption({ label: '1001-5000' });
-    await wellnessPage.interestSelect.selectOption({ label: 'Referring someone' });
-
-    const sizeValue = await wellnessPage.orgSizeSelect.inputValue();
-    const interestValue = await wellnessPage.interestSelect.inputValue();
+    await wellnessPage.dropdownValues();//select dropdown values
+    
+    const {sizeValue,interestValue } = await wellnessPage.inputDropdownValues();//geting the selected values from the dropdowns
 
     expect(sizeValue).toBe('1001-5000');
-    expect(interestValue).toBe('Referring someone');
+    expect(interestValue).toBe('Referring someone');//validates the dropdown values.
   } catch (e) {
     console.log('Dropdown values reflect correctly after selection');
   }
@@ -55,7 +52,7 @@ test('@sanity Url contains corporate', async ({ page }) => {
     await wellnessPage.goto();
     const url = await page.url();
     console.log('Current URL', url);
-    await expect(url).toContain('corporate');
+    await expect(url).toContain('corporate');//validates that the url contains corporate
   } catch (e) {
     console.log('Url contains corporate');
   }

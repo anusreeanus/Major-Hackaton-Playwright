@@ -10,6 +10,7 @@ export class AccountLogin {
       this.userName=page.locator("//span[@id='usernameErrorBlock']");
       this.passwordError = page.locator("//span[@id='passwordErrorBlock']");
       this.rememberCheckbox = page.locator("#remember"); 
+     // this.login_name=page.locator("span[class='up-triangle'] span[class='user_info_top']")
     }
   
     async gotoLoginPage() {
@@ -35,6 +36,9 @@ export class AccountLogin {
       async isRememberMeChecked() {
         return await this.rememberCheckbox.isChecked();
       }
-    
+     
+      // async getloginName() {
+      //   return await this.login_name.innerText()
+      // }
   }
   

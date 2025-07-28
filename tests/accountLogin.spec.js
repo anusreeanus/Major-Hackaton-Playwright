@@ -6,7 +6,7 @@ let accountLogin;
 
 test.beforeEach(async ({ page }) => {
   accountLogin = new AccountLogin(page);
-  await accountLogin.gotoLoginPage();
+  await accountLogin.gotoLoginPage();//Navigates to the login page
 });
 
 test.afterEach(async ({ page }) => {
@@ -18,7 +18,7 @@ test.afterEach(async ({ page }) => {
 //
 
 test('@sanity Valid Login', async () => {
-  await accountLogin.login(loginData.valid.username, loginData.valid.password);
+  await accountLogin.login(loginData.valid.username, loginData.valid.password);//Perform login with valid credentials
 
 });
 
@@ -38,7 +38,7 @@ test('@regression Empty Password Field Error', async () => {
   const errorMessage = await accountLogin.getPasswordErrorText();
   expect(
     errorMessage.includes('Password field cannot be empty') || errorMessage.includes('Password is mandatory')|| errorMessage.includes('')
-  ).toBe(true);
+  ).toBe(true);//Check if the error message is correct
 })
 
 test('@regression Empty login input error messages', async () => {
@@ -48,9 +48,15 @@ test('@regression Empty login input error messages', async () => {
   expect(
     usernameError.includes('Mobile Number / Email ID field cannot be empty') ||
     usernameError.includes('Username is mandatory')
-  ).toBe(true);
+  ).toBe(true);//checks if the error message is correct or not
   expect(
     passwordError.includes('Password field cannot be empty') || passwordError.includes('Password is mandatory')||passwordError.includes('')
   ).toBe(true);
 });
 
+// test('@sanity Valid Login', async () => {
+//   await accountLogin.login(loginData.valid.username, loginData.valid.password);
+//   const UName=await accountLogin.getloginName()
+//   console.log(UName)
+//   await expect(UName).toBe('Kiran')
+// });

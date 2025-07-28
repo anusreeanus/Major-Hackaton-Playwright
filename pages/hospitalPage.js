@@ -53,7 +53,7 @@ export class HospitalPage {
                     const availabilityText = (await card.locator('.pd-right-2px-text-green').textContent()).trim();
                     const locationText = (await card.locator('.c-locality-info').textContent()).trim();
 
-                    const ratingValue = parseFloat(ratingText);
+                    const ratingValue = parseFloat(ratingText);//converts the rating text to a number
 
                     if (ratingValue > 3.5 && availabilityText.includes('24x7')) {
                         qualifiedHospitals.push({
@@ -61,14 +61,14 @@ export class HospitalPage {
                             rating: ratingValue,
                             availability: availabilityText,
                             location: locationText,
-                        });
+                        });//Add the hospital to list that meets the criteria
                     }
                 } catch (error) {
                     console.warn('Skipped a hospital due to missing or malformed data:', error);
                 }
             }
 
-            //console.log('Qualified Hospitals:', qualifiedHospitals);
+           
             return qualifiedHospitals;
 
         } catch (error) {
@@ -82,8 +82,8 @@ export class HospitalPage {
     }
     async enterInvalidSearchAndCaptureMessage(invalidText) {
 
-        await this.hospitaltype.click(); // Ensure focus
-        await this.hospitaltype.fill(invalidText);
+        await this.hospitaltype.click(); //clicks to focus on the input field
+        await this.hospitaltype.fill(invalidText);//fill the input with invalid text
 
         await this.page.waitForTimeout(10000);
 
@@ -93,7 +93,7 @@ export class HospitalPage {
 
         await this.messageLocator.waitFor(); // Ensure it's visible
 
-        const errMessage = await this.messageLocator.textContent();
+        const errMessage = await this.messageLocator.textContent();//Get the error message text
 
         return errMessage;
     }
